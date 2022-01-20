@@ -1,9 +1,11 @@
 #include "VertexBufferLayout.h"
 
-VertexBufferLayout::VertexBufferLayout()
-{
-}
+namespace OpenGLEngine {
+	VertexBufferLayout::VertexBufferLayout()
+	{
+	}
 
-VertexBufferLayout::~VertexBufferLayout()
-{
+	VertexBufferLayout::~VertexBufferLayout()
+	{
+	}
 }

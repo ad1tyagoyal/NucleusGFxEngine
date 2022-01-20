@@ -27,7 +27,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -84,13 +84,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\projects\sandbox_application\SandBox.cpp" />
+    <ClCompile Include="src\utils\LayerStack.cpp" />
+    <ClCompile Include="src\utils\Layer.cpp" />
     <ClCompile Include="src\utils\Input.cpp" />
     <ClCompile Include="src\utils\Renderer.cpp" />
-    <ClCompile Include="src\projects\OpenGLEngine\OpenGLEngine.cpp" />
+    <ClCompile Include="src\utils\Application.cpp" />
     <ClCompile Include="src\utils\OrthographicCamera.cpp" />
     <ClCompile Include="src\utils\perlin_noise\NoiseGenerator.cpp" />
     <ClCompile Include="src\utils\perlin_noise\SimplexNoise.cpp" />
-    <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\utils\Buffer.cpp" />
     <ClCompile Include="src\utils\OpenGLWindow.cpp" />
     <ClCompile Include="src\utils\Shader.cpp" />
@@ -100,13 +102,14 @@
     <ClCompile Include="src\utils\VertexBufferLayout.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\utils\LayerStack.h" />
+    <ClInclude Include="src\utils\Layer.h" />
     <ClInclude Include="src\utils\Input.h" />
     <ClInclude Include="src\utils\Renderer.h" />
-    <ClInclude Include="src\projects\OpenGLEngine\OpenGLEngine.h" />
+    <ClInclude Include="src\utils\Application.h" />
     <ClInclude Include="src\utils\OrthographicCamera.h" />
     <ClInclude Include="src\utils\perlin_noise\NoiseGenerator.h" />
     <ClInclude Include="src\utils\perlin_noise\SimplexNoise.h" />
-    <ClInclude Include="src\interface\IApplication.h" />
     <ClInclude Include="src\utils\Buffer.h" />
     <ClInclude Include="src\utils\OpenGLWindow.h" />
     <ClInclude Include="src\utils\Shader.h" />

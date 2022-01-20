@@ -1,10 +1,10 @@
 #include <iostream>
 
-#include "src/projects/OpenGLEngine/OpenGLEngine.h"
+#include "src/utils/Application.h"
+
 
 int main() {
-	
-	OpenGLEngine* engine = new OpenGLEngine();
-	engine->OnUpdate();
-	return 0;
+	/*OpenGLEngine::Application* application = new OpenGLEngine::Application();
+	application->Run();
+	delete application;*/
 }

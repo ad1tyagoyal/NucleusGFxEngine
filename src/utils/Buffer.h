@@ -1,38 +1,42 @@
 #pragma once
 #include"src/utils/VertexBufferLayout.h"
 
-class VertexBuffer {
-public:
-	//template<typename T>
-	VertexBuffer(unsigned int size, float* vertices);
-	~VertexBuffer();
+namespace OpenGLEngine {
 
-	void Bind();
-	void UnBind();
+	class VertexBuffer {
+	public:
+		//template<typename T>
+		VertexBuffer(unsigned int size, float* vertices);
+		~VertexBuffer();
 
-	inline VertexBufferLayout& GetLayout() { return m_Layout; }
-	inline void SetLayout(const VertexBufferLayout& layout) { m_Layout = layout; }
+		void Bind();
+		void UnBind();
+
+		inline VertexBufferLayout& GetLayout() { return m_Layout; }
+		inline void SetLayout(const VertexBufferLayout& layout) { m_Layout = layout; }
 
 
-private:
-	unsigned int m_RendererID;
-	VertexBufferLayout m_Layout;
-};
+	private:
+		unsigned int m_RendererID;
+		VertexBufferLayout m_Layout;
+	};
 
-class IndexBuffer {
+	class IndexBuffer {
 
-public:
-	IndexBuffer(unsigned int count, unsigned int* indices);
-	~IndexBuffer();
+	public:
+		IndexBuffer(unsigned int count, unsigned int* indices);
+		~IndexBuffer();
 
-	void Bind();
-	void UnBind();
+		void Bind();
+		void UnBind();
 
-	inline unsigned int GetCount() { return m_Count; }
+		inline unsigned int GetCount() { return m_Count; }
 
-private:
-	unsigned int m_RendererID;
-	unsigned int m_Count = 0;
-};
+	private:
+		unsigned int m_RendererID;
+		unsigned int m_Count = 0;
+	};
 
+
+}
 
