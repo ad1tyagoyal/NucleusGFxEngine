@@ -72,28 +72,29 @@ public:
 	
 	virtual void OnUpdate() override {
 		if (OpenGLEngine::Input::IsKeyPressed(nativeWindow, GLFW_KEY_W))
-			m_CameraPosition.y += m_CamMovingSpeed;
+			m_CameraPosition.y += m_CamMovingSpeed * OpenGLEngine::TimeStamp::GetDeltaTime();
 		if (OpenGLEngine::Input::IsKeyPressed(nativeWindow, GLFW_KEY_A))
-			m_CameraPosition.x -= m_CamMovingSpeed;
+			m_CameraPosition.x -= m_CamMovingSpeed * OpenGLEngine::TimeStamp::GetDeltaTime();
 		if (OpenGLEngine::Input::IsKeyPressed(nativeWindow, GLFW_KEY_S))
-			m_CameraPosition.y -= m_CamMovingSpeed;
+			m_CameraPosition.y -= m_CamMovingSpeed * OpenGLEngine::TimeStamp::GetDeltaTime();
 		if (OpenGLEngine::Input::IsKeyPressed(nativeWindow, GLFW_KEY_D))
-			m_CameraPosition.x += m_CamMovingSpeed;
+			m_CameraPosition.x += m_CamMovingSpeed * OpenGLEngine::TimeStamp::GetDeltaTime();
 
 		if (OpenGLEngine::Input::IsKeyPressed(nativeWindow, GLFW_KEY_O))
-			m_CameraRotationZ += m_CamRotationSpeed;
+			m_CameraRotationZ += m_CamRotationSpeed * OpenGLEngine::TimeStamp::GetDeltaTime();
 		if (OpenGLEngine::Input::IsKeyPressed(nativeWindow, GLFW_KEY_P))
-			m_CameraRotationZ -= m_CamRotationSpeed;
+			m_CameraRotationZ -= m_CamRotationSpeed * OpenGLEngine::TimeStamp::GetDeltaTime();
 
 
+		OpenGLEngine::TimeStamp::SceneStart();
 		OpenGLEngine::Renderer::BeginScene({ 0.0f, 0.0f, 0.0f, 1.0f });
 		m_OrthographicCamera.SetPosition(m_CameraPosition);
 		m_OrthographicCamera.SetRotation(m_CameraRotationZ);
 		m_Shader->SetUniformMatrix4fv("u_ViewProjectionMatrix", 1, GL_FALSE, glm::value_ptr(m_OrthographicCamera.GetViewProjectionMatrix()));
 		OpenGLEngine::Renderer::DrawElements(m_VertexArraySquare);
 		OpenGLEngine::Renderer::DrawElements(m_VertexArrayTriangle);
-
 		OpenGLEngine::Renderer::EndScene(nativeWindow);
+		OpenGLEngine::TimeStamp::SceneEnd();
 
 	}
 	
@@ -124,8 +125,8 @@ private:
 	glm::vec3 m_CameraPosition;
 	float m_CameraRotationZ;
 
-	float m_CamMovingSpeed = 0.1f;
-	float m_CamRotationSpeed = 0.1f;
+	float m_CamMovingSpeed = 10.0f;
+	float m_CamRotationSpeed = 45.0f;
 };
 
 

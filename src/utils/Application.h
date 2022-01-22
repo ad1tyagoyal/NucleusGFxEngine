@@ -14,6 +14,7 @@
 #include "src/utils/OrthographicCamera.h";
 #include "src/utils/Renderer.h"
 #include "src/utils/VertexBufferLayout.h";
+#include "src/utils/TimeStamp.h"
 
 #include <glm/gtc/type_ptr.hpp>
 
