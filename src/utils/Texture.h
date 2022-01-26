@@ -12,7 +12,7 @@ namespace OpenGLEngine {
 
 	private:
 		unsigned int m_RendererID;
-		int m_Width, m_Height, m_BPP, m_Slot;
+		int m_Width, m_Height, m_Channels, m_Slot;
 		unsigned char* m_Data;
 	};
 

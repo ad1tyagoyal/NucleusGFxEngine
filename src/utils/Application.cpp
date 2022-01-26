@@ -7,6 +7,7 @@ namespace OpenGLEngine {
 	Application::Application() {
 		s_Instance = this;
 		m_Window.reset(new OpenGLWindow(1920.0f, 1080.0f));
+		Renderer::Init();
 	}
 
 	Application::~Application()
