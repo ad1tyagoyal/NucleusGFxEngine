@@ -84,6 +84,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\utils\ShaderLibrary.cpp" />
     <ClCompile Include="src\projects\sandbox_application\SandBox.cpp" />
     <ClCompile Include="src\utils\LayerStack.cpp" />
     <ClCompile Include="src\utils\Layer.cpp" />
@@ -103,6 +104,7 @@
     <ClCompile Include="src\utils\TimeStamp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\utils\ShaderLibrary.h" />
     <ClInclude Include="src\utils\LayerStack.h" />
     <ClInclude Include="src\utils\Layer.h" />
     <ClInclude Include="src\utils\Input.h" />

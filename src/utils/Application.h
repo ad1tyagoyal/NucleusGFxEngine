@@ -10,11 +10,11 @@
 
 #include "src/utils/VertexArray.h";
 #include "src/utils/Buffer.h";
-#include "src/utils/Shader.h";
 #include "src/utils/OrthographicCamera.h";
 #include "src/utils/Renderer.h"
 #include "src/utils/VertexBufferLayout.h";
 #include "src/utils/TimeStamp.h"
+#include "src/utils/ShaderLibrary.h"
 
 #include <glm/gtc/type_ptr.hpp>
 

@@ -33,7 +33,6 @@ public:
 		layout.Push<float>(3, "Positions");
 		layout.Push<float>(3, "Colors");
 
-
 		{
 			m_VertexArrayTriangle.reset(new OpenGLEngine::VertexArray());
 			m_VertexArrayTriangle->Bind();
@@ -57,10 +56,8 @@ public:
 
 		}
 
-
-
-		m_Shader.reset(new OpenGLEngine::Shader("src/res/BasicShader.shader"));
-		m_Shader->Bind();
+		OpenGLEngine::Shader* shader = m_ShaderLibrary.LoadShader("BasicShader", "src/res/BasicShader.shader");
+		shader->Bind();
 	}
 	
 	~ExampleLayer() {
@@ -90,7 +87,9 @@ public:
 		OpenGLEngine::Renderer::BeginScene({ 0.0f, 0.0f, 0.0f, 1.0f });
 		m_OrthographicCamera.SetPosition(m_CameraPosition);
 		m_OrthographicCamera.SetRotation(m_CameraRotationZ);
-		m_Shader->SetUniformMatrix4fv("u_ViewProjectionMatrix", 1, GL_FALSE, glm::value_ptr(m_OrthographicCamera.GetViewProjectionMatrix()));
+
+		OpenGLEngine::Shader* shader = m_ShaderLibrary.Get("BasicShader");
+		shader->SetUniformMatrix4fv("u_ViewProjectionMatrix", 1, GL_FALSE, glm::value_ptr(m_OrthographicCamera.GetViewProjectionMatrix()));
 		OpenGLEngine::Renderer::DrawElements(m_VertexArraySquare);
 		OpenGLEngine::Renderer::DrawElements(m_VertexArrayTriangle);
 		OpenGLEngine::Renderer::EndScene(nativeWindow);
@@ -118,7 +117,8 @@ private:
 	std::shared_ptr <OpenGLEngine::IndexBuffer> triangleIndexBuffer;
 	std::shared_ptr <OpenGLEngine::IndexBuffer> squareIndexBuffer;
 
-	std::shared_ptr <OpenGLEngine::Shader> m_Shader;
+	OpenGLEngine::ShaderLibrary m_ShaderLibrary;
+
 
 	OpenGLEngine::OrthographicCamera m_OrthographicCamera;
 
