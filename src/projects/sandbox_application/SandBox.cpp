@@ -1,63 +1,13 @@
 #include "src/utils/Application.h"
+#include "src/utils/primitive_shapes/PrimitiveShapes.h"
+
 
 class ExampleLayer : public OpenGLEngine::Layer {
 public:
 	ExampleLayer() 
 		: nativeWindow(OpenGLEngine::Application::GetApplication().GetWindow().GetNativeWindow()),
-		m_OrthographicCamera(-5.0f, 5.0f, -2.8125f, 2.8125f),
-		m_CameraPosition({0.0f, 0.0f, 0.0f}), m_CameraRotationZ(0.0f) {
-		
-
-		float triangleVertices[] = {
-		   -0.25f, -0.25f, 0.0f, 1.0f, 0.0f, 1.0f,
-			0.0f,   0.25f, 0.0f, 1.0f, 0.0f, 1.0f,
-			0.25f, -0.25f, 0.0f, 1.0f, 0.0f, 1.0f
-		};
-
-		unsigned int triangleIndices[] = { 0, 1, 2 };
-
-		float squareVertices[] = {
-		   -1.5f, -1.5f, -1.0f, 0.2f, 0.3f, 0.4f,
-		   -1.5f,  -0.5f, -1.0f, 0.5f, 0.6f, 0.7f,
-			-0.5f,  -0.5f, -1.0f, 0.8f, 0.9f, 0.1f,
-			-0.5f, -1.5f, -1.0f, 0.2f, 0.4f, 0.6f,
-		};
-
-		unsigned int squareIndices[] = {
-			0, 1, 2,
-			2, 3, 0
-		};
-
-		//layout for both triangle and square
-		OpenGLEngine::VertexBufferLayout layout;
-		layout.Push<float>(3, "Positions");
-		layout.Push<float>(3, "Colors");
-
-		{
-			m_VertexArrayTriangle.reset(new OpenGLEngine::VertexArray());
-			m_VertexArrayTriangle->Bind();
-			triangleVertexBuffer.reset(new OpenGLEngine::VertexBuffer(sizeof(triangleVertices), triangleVertices));
-			triangleVertexBuffer->SetLayout(layout);
-			triangleVertexBuffer->Bind();
-			m_VertexArrayTriangle->AddVertexBuffer(triangleVertexBuffer);
-			triangleIndexBuffer.reset(new OpenGLEngine::IndexBuffer(3, triangleIndices));
-			m_VertexArrayTriangle->SetIndexBuffer(triangleIndexBuffer);
-
-		}
-		{
-			m_VertexArraySquare.reset(new OpenGLEngine::VertexArray());
-			m_VertexArraySquare->Bind();
-			squareVertexBuffer.reset(new OpenGLEngine::VertexBuffer(sizeof(squareVertices), squareVertices));
-			squareVertexBuffer->SetLayout(layout);
-			squareVertexBuffer->Bind();
-			m_VertexArraySquare->AddVertexBuffer(squareVertexBuffer);
-			squareIndexBuffer.reset(new OpenGLEngine::IndexBuffer(6, squareIndices));
-			m_VertexArraySquare->SetIndexBuffer(squareIndexBuffer);
-
-		}
-
-		OpenGLEngine::Shader* shader = m_ShaderLibrary.LoadShader("BasicShader", "src/res/BasicShader.shader");
-		shader->Bind();
+		m_OrthographicCamera(-5.0f, 5.0f, -2.8125f, 2.8125f), m_OrthographicCameraController(m_OrthographicCamera) {
+		OpenGLEngine::Renderer2D::Init();
 	}
 	
 	~ExampleLayer() {
@@ -68,31 +18,17 @@ public:
 	}
 	
 	virtual void OnUpdate() override {
-		if (OpenGLEngine::Input::IsKeyPressed(nativeWindow, GLFW_KEY_W))
-			m_CameraPosition.y += m_CamMovingSpeed * OpenGLEngine::TimeStamp::GetDeltaTime();
-		if (OpenGLEngine::Input::IsKeyPressed(nativeWindow, GLFW_KEY_A))
-			m_CameraPosition.x -= m_CamMovingSpeed * OpenGLEngine::TimeStamp::GetDeltaTime();
-		if (OpenGLEngine::Input::IsKeyPressed(nativeWindow, GLFW_KEY_S))
-			m_CameraPosition.y -= m_CamMovingSpeed * OpenGLEngine::TimeStamp::GetDeltaTime();
-		if (OpenGLEngine::Input::IsKeyPressed(nativeWindow, GLFW_KEY_D))
-			m_CameraPosition.x += m_CamMovingSpeed * OpenGLEngine::TimeStamp::GetDeltaTime();
-
-		if (OpenGLEngine::Input::IsKeyPressed(nativeWindow, GLFW_KEY_O))
-			m_CameraRotationZ += m_CamRotationSpeed * OpenGLEngine::TimeStamp::GetDeltaTime();
-		if (OpenGLEngine::Input::IsKeyPressed(nativeWindow, GLFW_KEY_P))
-			m_CameraRotationZ -= m_CamRotationSpeed * OpenGLEngine::TimeStamp::GetDeltaTime();
+		
 
 
 		OpenGLEngine::TimeStamp::SceneStart();
-		OpenGLEngine::Renderer::BeginScene({ 0.0f, 0.0f, 0.0f, 1.0f });
-		m_OrthographicCamera.SetPosition(m_CameraPosition);
-		m_OrthographicCamera.SetRotation(m_CameraRotationZ);
-
-		OpenGLEngine::Shader* shader = m_ShaderLibrary.Get("BasicShader");
-		shader->SetUniformMatrix4fv("u_ViewProjectionMatrix", 1, GL_FALSE, glm::value_ptr(m_OrthographicCamera.GetViewProjectionMatrix()));
-		OpenGLEngine::Renderer::DrawElements(m_VertexArraySquare);
-		OpenGLEngine::Renderer::DrawElements(m_VertexArrayTriangle);
-		OpenGLEngine::Renderer::EndScene(nativeWindow);
+		OpenGLEngine::Renderer2D::BeginScene({ 0.0f, 0.0f, 0.0f, 1.0f });
+		
+		m_OrthographicCameraController.UpdateCamera();
+		OpenGLEngine::Renderer2D::UpdateShaderData(m_OrthographicCameraController.GetCamera().GetViewProjectionMatrix());
+		OpenGLEngine::Renderer2D::DrawVertexArrays();
+		
+		OpenGLEngine::Renderer2D::EndScene(nativeWindow);
 		OpenGLEngine::TimeStamp::SceneEnd();
 
 	}
@@ -107,26 +43,8 @@ public:
 private:
 
 	GLFWwindow* nativeWindow;
-
-	std::shared_ptr <OpenGLEngine::VertexArray> m_VertexArraySquare;
-	std::shared_ptr <OpenGLEngine::VertexArray> m_VertexArrayTriangle;
-
-	std::shared_ptr <OpenGLEngine::VertexBuffer> triangleVertexBuffer;
-	std::shared_ptr <OpenGLEngine::VertexBuffer> squareVertexBuffer;
-
-	std::shared_ptr <OpenGLEngine::IndexBuffer> triangleIndexBuffer;
-	std::shared_ptr <OpenGLEngine::IndexBuffer> squareIndexBuffer;
-
-	OpenGLEngine::ShaderLibrary m_ShaderLibrary;
-
-
 	OpenGLEngine::OrthographicCamera m_OrthographicCamera;
-
-	glm::vec3 m_CameraPosition;
-	float m_CameraRotationZ;
-
-	float m_CamMovingSpeed = 10.0f;
-	float m_CamRotationSpeed = 45.0f;
+	OpenGLEngine::OrthographicCameraController m_OrthographicCameraController;
 };
 
 

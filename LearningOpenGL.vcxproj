@@ -84,14 +84,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\utils\renderer\Renderer2D.cpp" />
+    <ClCompile Include="src\utils\camera\OrthographicCameraController.cpp" />
+    <ClCompile Include="src\utils\primitive_shapes\PrimitiveShapes.cpp" />
     <ClCompile Include="src\utils\ShaderLibrary.cpp" />
     <ClCompile Include="src\projects\sandbox_application\SandBox.cpp" />
     <ClCompile Include="src\utils\LayerStack.cpp" />
     <ClCompile Include="src\utils\Layer.cpp" />
     <ClCompile Include="src\utils\Input.cpp" />
-    <ClCompile Include="src\utils\Renderer.cpp" />
+    <ClCompile Include="src\utils\renderer\Renderer.cpp" />
     <ClCompile Include="src\utils\Application.cpp" />
-    <ClCompile Include="src\utils\OrthographicCamera.cpp" />
+    <ClCompile Include="src\utils\camera\OrthographicCamera.cpp" />
     <ClCompile Include="src\utils\perlin_noise\NoiseGenerator.cpp" />
     <ClCompile Include="src\utils\perlin_noise\SimplexNoise.cpp" />
     <ClCompile Include="src\utils\Buffer.cpp" />
@@ -104,13 +107,16 @@
     <ClCompile Include="src\utils\TimeStamp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\utils\renderer\Renderer2D.h" />
+    <ClInclude Include="src\utils\camera\OrthographicCameraController.h" />
+    <ClInclude Include="src\utils\primitive_shapes\PrimitiveShapes.h" />
     <ClInclude Include="src\utils\ShaderLibrary.h" />
     <ClInclude Include="src\utils\LayerStack.h" />
     <ClInclude Include="src\utils\Layer.h" />
     <ClInclude Include="src\utils\Input.h" />
-    <ClInclude Include="src\utils\Renderer.h" />
+    <ClInclude Include="src\utils\renderer\Renderer.h" />
     <ClInclude Include="src\utils\Application.h" />
-    <ClInclude Include="src\utils\OrthographicCamera.h" />
+    <ClInclude Include="src\utils\camera\OrthographicCamera.h" />
     <ClInclude Include="src\utils\perlin_noise\NoiseGenerator.h" />
     <ClInclude Include="src\utils\perlin_noise\SimplexNoise.h" />
     <ClInclude Include="src\utils\Buffer.h" />

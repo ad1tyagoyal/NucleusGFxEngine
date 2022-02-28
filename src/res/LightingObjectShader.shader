@@ -105,6 +105,7 @@ vec3 CalculateDirectionalLight(DirectionalLight light, vec3 normal, vec3 viewDir
 }
 
 vec3 CalculatePointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir) {
+	//find direction
 	vec3 lightDir = normalize(-1.0 * light.direction);
 	float diff = max(dot(lightDir, normal), 0.0);
 
