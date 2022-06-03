@@ -6,7 +6,8 @@ class ExampleLayer : public OpenGLEngine::Layer {
 public:
 	ExampleLayer() 
 		: nativeWindow(OpenGLEngine::Application::GetApplication().GetWindow().GetNativeWindow()),
-		m_OrthographicCamera(-5.0f, 5.0f, -2.8125f, 2.8125f), m_OrthographicCameraController(m_OrthographicCamera) {
+		m_OrthographicCamera(-5.0f, 5.0f, -2.8125f, 2.8125f), m_OrthographicCameraController(m_OrthographicCamera),
+		m_BoxTexture("src/res/container_diffuse.jpeg") {
 		OpenGLEngine::Renderer2D::Init();
 	}
 	
@@ -18,19 +19,17 @@ public:
 	}
 	
 	virtual void OnUpdate() override {
-		
-
-
-		OpenGLEngine::TimeStamp::SceneStart();
 		OpenGLEngine::Renderer2D::BeginScene({ 0.0f, 0.0f, 0.0f, 1.0f });
+		OpenGLEngine::TimeStamp::SceneStart();
 		
 		m_OrthographicCameraController.UpdateCamera();
 		OpenGLEngine::Renderer2D::UpdateShaderData(m_OrthographicCameraController.GetCamera().GetViewProjectionMatrix());
-		OpenGLEngine::Renderer2D::DrawVertexArrays();
+		//OpenGLEngine::Renderer2D::DrawQuad(1.0f, { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.1f });
+		OpenGLEngine::Renderer2D::DrawQuad(1.0f, { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.1f }, m_BoxTexture);
+		OpenGLEngine::Renderer2D::DrawQuad(1.0f, { 0.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.1f }, m_BoxTexture);
 		
-		OpenGLEngine::Renderer2D::EndScene(nativeWindow);
 		OpenGLEngine::TimeStamp::SceneEnd();
-
+		OpenGLEngine::Renderer2D::EndScene(nativeWindow);
 	}
 	
 	virtual void OnDetach() override {
@@ -45,6 +44,7 @@ private:
 	GLFWwindow* nativeWindow;
 	OpenGLEngine::OrthographicCamera m_OrthographicCamera;
 	OpenGLEngine::OrthographicCameraController m_OrthographicCameraController;
+	OpenGLEngine::Texture m_BoxTexture;
 };
 
 

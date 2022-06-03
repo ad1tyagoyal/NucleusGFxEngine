@@ -36,7 +36,6 @@ namespace OpenGLEngine {
 		inline OpenGLWindow& GetWindow() { return *m_Window; }
 
 	private:
-
 		static Application* s_Instance;
 		std::unique_ptr<OpenGLWindow> m_Window;
 		LayerStack m_LayerStack;

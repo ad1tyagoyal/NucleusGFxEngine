@@ -17,6 +17,7 @@ namespace OpenGLEngine {
 	void LayerStack::PopLayer(Layer* layer) {
 		std::vector<Layer*>::iterator it = std::find(m_Layers.begin(), m_Layers.end(), layer);
 		if (it != m_Layers.end()) {
+			//found the layer
 			m_Layers.erase(it);
 			m_LayerInsertIndex--;
 		}
@@ -29,6 +30,7 @@ namespace OpenGLEngine {
 	void LayerStack::PopOverlay(Layer* overlay) {
 		std::vector<Layer*>::iterator it = std::find(m_Layers.begin(), m_Layers.end(), overlay);
 		if (it != m_Layers.end()) {
+			//found the overlay
 			m_Layers.erase(it);
 		}
 	}

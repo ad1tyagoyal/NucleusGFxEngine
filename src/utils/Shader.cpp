@@ -9,8 +9,7 @@
 
 namespace OpenGLEngine {
 
-	Shader::Shader()
-	{
+	Shader::Shader() {
 	}
 
 	Shader::Shader(const std::string& filePath)

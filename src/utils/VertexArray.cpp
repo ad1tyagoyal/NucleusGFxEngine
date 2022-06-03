@@ -13,7 +13,7 @@ namespace OpenGLEngine {
 	}
 
 	VertexArray::~VertexArray() {
-
+		glDeleteVertexArrays(1, &m_RendererID);
 	}
 
 	void VertexArray::Bind() {
@@ -47,6 +47,7 @@ namespace OpenGLEngine {
 
 	void VertexArray::SetIndexBuffer(std::shared_ptr<IndexBuffer>& buffer) {
 		glBindVertexArray(m_RendererID);
+		m_VertexBuffer->Bind();
 		buffer->Bind();
 		m_IndexBuffer = buffer;
 	}

@@ -132,6 +132,7 @@
     <None Include="src\res\BasicShader.shader" />
     <None Include="src\res\LightingLightShader.shader" />
     <None Include="src\res\LightingObjectShader.shader" />
+    <None Include="src\res\SimpleTextureShader.shader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="src\res\container_diffuse.jpeg" />

@@ -2,25 +2,28 @@
 #version 330 core
 
 layout(location = 0) in vec3 a_Position;
-//layout(location = 1) in vec3 a_Color;
-
-out vec3 v_Position;
+layout(location = 1) in vec2 a_TextCoor;
 
 uniform mat4 u_TransformMat;
 uniform mat4 u_ViewProjectionMatrix;
+out vec2 v_TextCoor;
 
 void main() {
 	gl_Position = u_ViewProjectionMatrix * u_TransformMat * vec4(a_Position, 1.0);
-	v_Position = a_Position;
+	v_TextCoor = a_TextCoor;
 }
 
 
 #shader fragment
 #version 330 core
 
-in vec3 v_Position;
+uniform sampler2D u_Texture;
+uniform vec4 u_TintColor;
+
 out vec4 color;
+in vec2 v_TextCoor;
+
 
 void main() {
-	color = vec4(v_Position + 0.5f, 1.0f);
+	color = texture(u_Texture, v_TextCoor) * vec4(u_TintColor);
 }

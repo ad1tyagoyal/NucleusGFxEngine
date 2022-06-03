@@ -17,6 +17,7 @@ namespace OpenGLEngine {
 		void SetIndexBuffer(std::shared_ptr<IndexBuffer>& buffer);
 
 		inline std::shared_ptr<IndexBuffer>& GetIndexBuffer() { return m_IndexBuffer; }
+		inline std::shared_ptr<VertexBuffer>& GetVertexBuffer() { return m_VertexBuffer; }
 
 	private:
 		unsigned int m_RendererID;

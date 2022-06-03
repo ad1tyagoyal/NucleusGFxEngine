@@ -5,7 +5,9 @@ namespace OpenGLEngine {
 	Application* Application::s_Instance = nullptr;
 
 	Application::Application() {
-		s_Instance = this;
+		if(s_Instance == nullptr) 
+			s_Instance = this;
+		
 		m_Window.reset(new OpenGLWindow(1920.0f, 1080.0f));
 		Renderer::Init();
 	}

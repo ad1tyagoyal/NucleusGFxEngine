@@ -23,6 +23,7 @@ namespace OpenGLEngine {
 
 		float m_CamMovingSpeed = 10.0f;
 		float m_CamRotationSpeed = 45.0f;
+		GLFWwindow* m_Window;
 	};
 
 
