@@ -9,8 +9,10 @@ namespace OpenGLEngine {
 		RecalculateViewMatrix();
 	}
 
-	OrthographicCamera::~OrthographicCamera()
-	{
+	OrthographicCamera::~OrthographicCamera() {
+		delete &m_ProjectionMatrix;
+		delete &m_RotationZ;
+		delete& m_ViewProjectionMatrix;
 	}
 
 	void OrthographicCamera::SetPosition(glm::vec3 position) {

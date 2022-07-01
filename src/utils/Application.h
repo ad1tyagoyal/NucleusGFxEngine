@@ -12,6 +12,7 @@
 #include "src/utils/Buffer.h";
 #include "src/utils/camera/OrthographicCamera.h"
 #include "src/utils/camera/OrthographicCameraController.h"
+#include "src/utils/camera/PerspectiveCamera.h"
 #include "src/utils/renderer/Renderer.h"
 #include "src/utils/renderer/Renderer2D.h"
 #include "src/utils/VertexBufferLayout.h";

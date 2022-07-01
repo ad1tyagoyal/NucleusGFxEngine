@@ -39,4 +39,7 @@ namespace OpenGLEngine {
 	OpenGLWindow::~OpenGLWindow() {
 		glfwDestroyWindow(m_Window);
 	}
+	void OpenGLWindow::SetCursorDisable() {
+		glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	}
 }

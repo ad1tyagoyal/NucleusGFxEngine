@@ -84,6 +84,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\utils\camera\PerspectiveCamera.cpp" />
     <ClCompile Include="src\utils\renderer\Renderer2D.cpp" />
     <ClCompile Include="src\utils\camera\OrthographicCameraController.cpp" />
     <ClCompile Include="src\utils\primitive_shapes\PrimitiveShapes.cpp" />
@@ -107,6 +108,7 @@
     <ClCompile Include="src\utils\TimeStamp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\utils\camera\PerspectiveCamera.h" />
     <ClInclude Include="src\utils\renderer\Renderer2D.h" />
     <ClInclude Include="src\utils\camera\OrthographicCameraController.h" />
     <ClInclude Include="src\utils\primitive_shapes\PrimitiveShapes.h" />

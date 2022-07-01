@@ -10,6 +10,8 @@ namespace OpenGLEngine {
 		OpenGLWindow(float width, float height);
 		~OpenGLWindow();
 
+		void SetCursorDisable();
+
 		inline GLFWwindow* GetNativeWindow() const { return m_Window; }
 		inline float GetHeight() const { return m_Height; }
 		inline float GetWidth() const { return m_Width; }

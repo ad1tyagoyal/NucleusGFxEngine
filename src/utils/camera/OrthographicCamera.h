@@ -4,7 +4,7 @@
 namespace OpenGLEngine {
 	class OrthographicCamera {
 	public:
-		OrthographicCamera(float left, float right, float bottom, float top);
+		OrthographicCamera(float fovy, float aspectRatio, float nearZ, float farZ);
 		~OrthographicCamera();
 
 		void SetPosition(glm::vec3 position);
