@@ -9,39 +9,47 @@
 #include "src/utils/Buffer.h"
 #include "src/utils/VertexArray.h"
 
-#include "Shader.h"
+#include "src/utils/Shader.h"
 
 #include "src/utils/OpenGLWindow.h"
 
 //Mesh - vertices, triangles, UVs
 //Vertex - position, texture coordinates, normals (for calculating lighting)
 
-struct Vertex {
-	glm::vec3 Position;
-	glm::vec3 Normal;
-	glm::vec2 TextCoordinate;
-};
+namespace OpenGLEngine {
 
-struct Texture {
-	unsigned int id;
-	std::string type;
-};
+	struct Vertex {
+		glm::vec3 Position;
+		//glm::vec3 Normal;
+		glm::vec2 TextCoordinate;
+	};
 
-class Mesh {
-public:
-	Mesh(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices/*, std::vector<Texture>& textures*/);
-	void Draw();
+	struct MeshTexture {
+		unsigned int id;
+		std::string type;
+	};
 
-private:
-	void SetupMesh();
+	class Mesh {
+	public:
+		Mesh();
+		~Mesh();
+		void BindMesh();
+		inline std::shared_ptr<VertexArray> GetVertexArray() { return m_VAO; }
+		void SetData(std::vector<float> vertices, std::vector<unsigned int> indices);
+		void InitComponents();
 
-	std::vector<Vertex> m_Vertices;
-	std::vector<unsigned int> m_Indices;
-	//std::vector<Texture> m_Textures;
 
-	VertexArray* m_VAO;
-	VertexBuffer* m_VBO;
-	IndexBuffer* m_IBO;
-	Shader* m_MeshShader;
-};
+	private:
+
+		std::vector<float> m_VerticesData;
+		std::vector<unsigned int> m_Indices;
+		//std::vector<Texture> m_Textures;
+
+		std::shared_ptr<VertexArray> m_VAO;
+		std::shared_ptr<VertexBuffer> m_VBO;
+		std::shared_ptr<IndexBuffer> m_IBO;
+	};
+}
+
+
 

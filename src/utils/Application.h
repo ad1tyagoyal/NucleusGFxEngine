@@ -19,6 +19,9 @@
 #include "src/utils/TimeStamp.h"
 #include "src/utils/ShaderLibrary.h"
 
+#include "src/utils/Mesh/Mesh.h"
+#include "src/utils/Mesh/MeshGenerator.h"
+
 
 #include <glm/gtc/type_ptr.hpp>
 

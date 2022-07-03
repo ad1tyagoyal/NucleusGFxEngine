@@ -81,6 +81,12 @@
     <ClCompile Include="src\utils\camera\PerspectiveCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\utils\Mesh\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\Mesh\MeshGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\utils\Buffer.h">
@@ -143,6 +149,12 @@
     <ClInclude Include="src\utils\camera\PerspectiveCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\utils\Mesh\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\Mesh\MeshGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\res\BasicShader.shader" />
@@ -156,6 +168,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="src\res\container_specular.jpeg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="src\res\Grass_Texture.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

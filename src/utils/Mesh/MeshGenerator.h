@@ -1,20 +1,19 @@
 #pragma once
 #include <iostream>
+#include "src/utils/Mesh/Mesh.h"
 
-#include "src/utils/Mesh.h"
+namespace OpenGLEngine {
 
-class MeshGenerator {
-public:
-	MeshGenerator();
-	MeshGenerator(int width, int length, int levelOfDetail, float scale, int octaves,
-													float lacunarity, float persistancy);
-	~MeshGenerator();
+	class MeshGenerator {
+	public:
+		MeshGenerator();
+		~MeshGenerator();
 
-	inline Mesh* GetMesh() const { return m_Mesh; }
+		static void GenerateMesh(Mesh* mesh, int width, int length, int levelOfDetail, float scale, int octaves,
+			float lacunarity, float persistancy, bool randomizeMesh);
+	};
+}
 
-private:
-	Mesh* m_Mesh;
-};
 
 
 //length, width = 256

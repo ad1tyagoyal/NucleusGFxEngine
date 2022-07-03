@@ -16,7 +16,7 @@ namespace OpenGLEngine {
 	public:
 		static void Init();
 		static void BeginScene(BackgroundColor color);
-		static void DrawElements(std::shared_ptr<VertexArray>& vertexArray);
+		static void DrawElements(const std::shared_ptr<VertexArray>& vertexArray);
 		static void EndScene(GLFWwindow* window);
 	};
 

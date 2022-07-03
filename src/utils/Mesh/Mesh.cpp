@@ -2,33 +2,49 @@
 #include <iostream>
 #include "src/utils/VertexBufferLayout.h"
 
-Mesh::Mesh(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices
-								/*, std::vector<Texture>& textures*/) 
-	: m_Vertices(vertices), m_Indices(indices)/*, m_Textures(textures)*/ {
-	SetupMesh();
+namespace OpenGLEngine {
+	Mesh::Mesh() {
+	}
+
+	void Mesh::SetData(std::vector<float> vertices, std::vector<unsigned int> indices) {
+		m_VerticesData = vertices;
+		m_Indices = indices;
+	}
+
+	Mesh::~Mesh() {
+		delete &m_VAO;
+		delete &m_VBO;
+		delete &m_IBO;
+	}
+
+	void Mesh::BindMesh() {
+		m_VAO->Bind();
+		m_VBO->Bind();
+		m_IBO->Bind();
+	}
+
+	void Mesh::InitComponents() {
+		VertexBufferLayout layout;
+		layout.Push<float>(3, "Position");
+		//layout.Push<float>(3, "Normal");
+		layout.Push<float>(2, "Texture Coordinate");
+
+		m_VAO.reset(new VertexArray());
+		m_VAO->Bind();
+
+		m_VBO.reset(new VertexBuffer(m_VerticesData.size() * sizeof(float), &m_VerticesData[0]));
+		m_VBO->SetLayout(layout);
+		m_VBO->Bind();
+		m_VAO->AddVertexBuffer(m_VBO);
+		
+		m_IBO.reset(new IndexBuffer(m_Indices.size(), &m_Indices.at(0)));
+		m_IBO->Bind();
+		m_VAO->SetIndexBuffer(m_IBO);
+
+		//m_VAO->UnBind();
+		//m_VBO->UnBind();
+		//m_IBO->UnBind();
+	}
+
 }
 
-void Mesh::Draw() {
-	m_VAO->Bind();
-	m_VBO->Bind();
-	m_IBO->Bind();
-	m_MeshShader->Bind();
-	glDrawElements(GL_TRIANGLES, m_Indices.size(), GL_UNSIGNED_INT, 0);
-}
-
-void Mesh::SetupMesh() {
-	m_VAO = new VertexArray();
-	m_VAO->Bind();
-	m_VBO = new VertexBuffer(m_Vertices.size() * sizeof(Vertex), &m_Vertices.at(0).Position.x);
-	m_VBO->Bind();
-	m_IBO = new IndexBuffer(m_Indices.size() * sizeof(unsigned int), &m_Indices.at(0));
-	m_IBO->Bind();
-	m_MeshShader = new Shader("src/res/BAsicMeshShader.shader");
-	VertexBufferLayout layout;
-	layout.Push<float>(3, "Position");
-	layout.Push<float>(3, "Normal");
-	layout.Push<float>(2, "Texture Coordinate");
-
-	m_VAO->AddVertexBuffer(*m_VBO, layout);
-	m_VAO->UnBind();
-}
